@@ -10,7 +10,7 @@ $(function () {
   // useful when saving the description in local storage?
   
 
-  
+
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
@@ -18,21 +18,27 @@ $(function () {
   // current hour in 24-hour time?
 
 
-var currentTime = dayjs().format('H')
+
+//Current Time from DayJs
+var currentTime = dayjs().format('h')
 console.log(currentTime)
 
-
-for(var hour = 9; hour <=17; hour++){
-  var row = $("<div>").attr('id', `hour:-${hour}`).addClass("row time-block");
-  // Hr for each row made
-  var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${hour}PM`);
+for(var i = 9; i <= 17; i++){
+  var hour = i + (currentTime >= 12 ? 12 : 0)
+  var hourText = hour == 12 ? "12AM" : (hour > 12 ? `${hour - 12}PM` : `${hour}AM`);
+ 
+  // Hr column for each row made
+  var row = $("<div>").attr('id', `hour:-${i}`).addClass("row time-block");
+  var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${hourText}`);
   row.append(hourCol);
+
+
     if(hour == currentTime){
-      row.addClass("present").css("color", "red")
-      } else if(hour > currentTime){
-      row.addClass("future").css("color", "green")
-      }else{
-        row.addClass("past").css("color", "grey")   
+        row.addClass("present").css("color", "red")
+        } else if(hourText < currentTime){
+        row.addClass("future").css("color", "grey")
+        }else{
+        row.addClass("past").css("color", "red")   
     }
 
   // Description for each row made
