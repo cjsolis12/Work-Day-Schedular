@@ -2,6 +2,10 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+  //Current Time from DayJs
+var currentTime = dayjs().format('H')
+console.log(currentTime)
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -9,7 +13,8 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   
-console.log("hey")
+
+
 $(".saveBtn").click(function(){
   var textArea = $(this).prev(".description").val();
   localStorage.setItem("calendarEvent", textArea)
@@ -19,10 +24,8 @@ $(".saveBtn").click(function(){
 
 
 
-//Current Time from DayJs
-var currentTime = dayjs().format('H')
-console.log(currentTime)
 
+// Looping from 9-17 to create each time block
 for(var i = 9; i <= 17; i++){
   var hourText = i == 12 ? "12PM" : (i > 12 ? `${i - 12}PM` : `${i}AM`);
  console.log(hourText)
@@ -30,15 +33,6 @@ for(var i = 9; i <= 17; i++){
   var row = $("<div>").attr('id', `hour:${i}`).addClass("row time-block");
   var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${hourText}`);
   row.append(hourCol);
- 
-  // Condition to check past, present, and future time blocks
-    if(i == currentTime){
-        row.addClass("present").css("background-color", "#e08071")
-        } else if(i < currentTime){
-        row.addClass("past").css("background-color", "#c6c6c3")
-        }else{
-        row.addClass("future").css("background-color", "#85e071")   
-    }
 
   // Description for each row made
   var description = $("<textarea>").addClass("col-8 col-md-10 description")
@@ -49,6 +43,15 @@ for(var i = 9; i <= 17; i++){
   row.append(saveButton)
   
   $(".container-fluid.px-5").append(row)
+
+    // Condition to check past, present, and future time blocks
+    if(i == currentTime){
+      row.addClass("present").css("background-color", "#e08071")
+      } else if(i < currentTime){
+      row.addClass("past").css("background-color", "#c6c6c3")
+      }else{
+      row.addClass("future").css("background-color", "#85e071")   
+  }
 }
 
 //   //
