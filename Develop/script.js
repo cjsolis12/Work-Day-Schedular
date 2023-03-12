@@ -15,11 +15,7 @@ console.log(currentTime)
   
 
 
-$(".saveBtn").click(function(){
-  var textArea = $(this).prev(".description").val();
-  localStorage.setItem("calendarEvent", textArea)
-  alert("is this")
-})
+
 
 
 
@@ -28,9 +24,10 @@ $(".saveBtn").click(function(){
 // Looping from 9-17 to create each time block
 for(var i = 9; i <= 17; i++){
   var hourText = i == 12 ? "12PM" : (i > 12 ? `${i - 12}PM` : `${i}AM`);
- console.log(hourText)
+  var divId = 'hour-' + i;
+  
   // Hr column for each row made
-  var row = $("<div>").attr('id', `hour:${i}`).addClass("row time-block");
+  var row = $("<div>").attr('id', divId).addClass("row time-block");
   var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${hourText}`);
   row.append(hourCol);
 
@@ -44,7 +41,7 @@ for(var i = 9; i <= 17; i++){
   
   $(".container-fluid.px-5").append(row)
 
-    // Condition to check past, present, and future time blocks
+// Condition to check past, present, and future time blocks
     if(i == currentTime){
       row.addClass("present").css("background-color", "#e08071")
       } else if(i < currentTime){
@@ -52,6 +49,12 @@ for(var i = 9; i <= 17; i++){
       }else{
       row.addClass("future").css("background-color", "#85e071")   
   }
+
+  // $('#').click(function(){
+  //   var textArea = $(this).prev(".description").val();
+  //   localStorage.setItem("calendarEvent", textArea)
+  //  console.log(textArea)
+  // })
 }
 
 //   //
