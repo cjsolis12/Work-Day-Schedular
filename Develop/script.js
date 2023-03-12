@@ -25,7 +25,7 @@ console.log(currentTime)
 for(var i = 9; i <= 17; i++){
   var hourText = i == 12 ? "12PM" : (i > 12 ? `${i - 12}PM` : `${i}AM`);
   var divId = 'hour-' + i;
-  
+
   // Hr column for each row made
   var row = $("<div>").attr('id', divId).addClass("row time-block");
   var hourCol = $("<div>").addClass("col-2 col-md-1 hour text-center py-3").text(`${hourText}`);
@@ -50,11 +50,10 @@ for(var i = 9; i <= 17; i++){
       row.addClass("future").css("background-color", "#85e071")   
   }
 
-  // $('#').click(function(){
-  //   var textArea = $(this).prev(".description").val();
-  //   localStorage.setItem("calendarEvent", textArea)
-  //  console.log(textArea)
-  // })
+  $('#' + divId).children('button').click(function(){
+    var textArea = $(this).prev(".description").val();
+    localStorage.setItem("calendarEvent", textArea)
+  })
 }
 
 //   //
