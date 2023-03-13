@@ -12,7 +12,7 @@ Thi simple calendar application allows a user to save events for each hour of th
 
 ![Wepage screenshot](calendarScreenshot.png)
 
-https://cjsolis12.github.io/coding-quiz/
+https://cjsolis12.github.io/Work-Day-Schedular/
 
 ## Credits
 - https://day.js.org/
