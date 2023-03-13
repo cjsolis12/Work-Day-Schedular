@@ -3,10 +3,9 @@
 // in the html.
 $(function () {
   //Current Time from DayJs
-var currentTime = dayjs().format('H')
-console.log(currentTime)
-
-
+  var currentTime = dayjs().format('H')
+ 
+  
 // Looping from 9-17 to create each time block
 for(var i = 9; i <= 17; i++){
   var hourText = i == 12 ? "12PM" : (i > 12 ? `${i - 12}PM` : `${i}AM`);
@@ -19,12 +18,15 @@ for(var i = 9; i <= 17; i++){
 
   // Description for each row made
   var description = $("<textarea>").addClass("col-8 col-md-10 description")
+  var storedUserInput = localStorage.getItem(divId);
+  if (storedUserInput !== null) {
+    description.val(storedUserInput)
+  }
   row.append(description)
 
   // Save Button for each new row 
   var saveButton = $("<button>").addClass("btn saveBtn col-2 col-md-1").attr("aria-label", "save").append($("<i>").addClass("fas fa-save").attr("aria-hidden", true));
   row.append(saveButton)
-  
   $(".container-fluid.px-5").append(row)
 
 // Condition to check past, present, and future time blocks
@@ -37,19 +39,11 @@ for(var i = 9; i <= 17; i++){
   }
 //click event saves local storage with its appropriate time block 
   $('.saveBtn').click(function(){
-    var timeBlock = $(this).closest('.time-block');
-    var timeBlockId = timeBlock.attr('id')
-    var textArea = timeBlock.find(".description").val();
-    localStorage.setItem(timeBlockId, textArea)
-  })
+    var timeBlock = $(this).parent().attr('id');
+    var textArea = $(this).siblings("textarea").val();
+    localStorage.setItem(timeBlock, textArea)
+  })  
 }
-
-//   //
-//   // TODO: Add code to get any user input that was saved in localStorage and set
-//   // the values of the corresponding textarea elements. HINT: How can the id
-//   // attribute of each time-block be used to do this?
-//   //
-
 
 // Add code to display the current date in the header of the page.
 let today = dayjs().format('dddd, MMMM D')
